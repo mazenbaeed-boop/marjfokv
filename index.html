@@ -1,0 +1,136 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Eco Hero — بطل البيئة</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    :root{--gold:#d4af37;--dark:#0b0b0b;--green:#1e7a3b}
+    html,body{font-family:'Cairo',sans-serif}
+    .gold{color:var(--gold)}
+    .bg-dark{background:linear-gradient(180deg,#050505, #0b0b0b)}
+    .nav-link{color:#cfcfcf}
+    .badge {background: linear-gradient(90deg,var(--gold),#b8860b); color:#0b0b0b; padding:8px 12px; border-radius:12px; font-weight:700;}
+  </style>
+</head>
+<body class="bg-dark text-white">
+  <header class="sticky top-0 z-50 backdrop-blur bg-black/30 border-b border-white/5">
+    <div class="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between">
+      <div class="flex items-center gap-3">
+        <div id="logo3d" class="w-12 h-12 rounded-full bg-gradient-to-br from-green-700 to-green-600 flex items-center justify-center shadow-lg">
+          <span class="text-2xl">🌿</span>
+        </div>
+        <div>
+          <div class="text-lg font-extrabold gold">Eco Hero</div>
+          <div class="text-sm text-gray-300">بطل البيئة</div>
+        </div>
+      </div>
+
+      <nav class="flex items-center gap-6">
+        <a href="#home" class="nav-link hover:gold">الرئيسية</a>
+        <a href="#about" class="nav-link hover:gold">عن المبادرة</a>
+        <a href="#tips" class="nav-link hover:gold">نصائح</a>
+        <a href="#challenge" class="nav-link hover:gold">التحديات</a>
+        <a href="#contact" class="nav-link hover:gold">اتصل بنا</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="max-w-6xl mx-auto px-6">
+    <section id="home" class="py-16 flex flex-col lg:flex-row items-center gap-10">
+      <div class="flex-1">
+        <h1 class="text-4xl lg:text-5xl font-extrabold gold leading-tight">كن بطل البيئة اليوم</h1>
+        <p class="mt-4 text-gray-300 max-w-xl">انضم إلى Eco Hero — خطوات بسيطة يومية لتقليل استخدام البلاستيك. كل عمل صغير يُحتسب.</p>
+        <div class="mt-6 flex gap-4">
+          <button id="gotoChallenge" class="px-6 py-3 rounded-xl bg-gradient-to-l from-green-600 to-green-500 font-bold shadow-md">ابدأ التحدي</button>
+          <a href="#tips" class="px-6 py-3 rounded-xl border border-white/10 text-gray-200">عرض النصائح</a>
+        </div>
+
+        <div class="mt-8 grid grid-cols-2 gap-4">
+          <div class="p-4 bg-white/5 rounded-xl">
+            <div class="text-sm text-gray-300">عدد قطع البلاستيك التي وفرتها</div>
+            <div id="plasticSaved" class="text-2xl font-bold mt-2">0</div>
+            <div class="text-xs text-gray-400 mt-1">كل قطعة تحسب!</div>
+          </div>
+          <div class="p-4 bg-white/5 rounded-xl">
+            <div class="text-sm text-gray-300">نقاطك</div>
+            <div id="points" class="text-2xl font-bold mt-2">0</div>
+            <div class="text-xs text-gray-400 mt-1">اكسب نقاطًا لإكمال التحديات</div>
+          </div>
+        </div>
+
+        <div class="mt-6">
+          <span id="badgeArea"></span>
+        </div>
+      </div>
+
+      <div class="flex-1 flex items-center justify-center">
+        <div id="threeContainer" class="w-80 h-80 rounded-2xl shadow-2xl bg-gradient-to-br from-black/50 to-black/30 p-4">
+          <canvas id="leafCanvas" class="w-full h-full rounded-lg"></canvas>
+        </div>
+      </div>
+    </section>
+
+    <section id="about" class="py-16 border-t border-white/5">
+      <h2 class="text-3xl gold font-extrabold">عن المبادرة</h2>
+      <p class="mt-4 text-gray-300 max-w-3xl">Eco Hero هي مبادرة مجتمعية تهدف لتشجيع الناس على تقليل استخدام البلاستيك أحادي الاستخدام. نجمع التحديات اليومية ونحولها إلى أثر حقيقي على الأرض.</p>
+    </section>
+
+    <section id="tips" class="py-16 border-t border-white/5">
+      <h2 class="text-3xl gold font-extrabold">نصائح لتقليل البلاستيك</h2>
+      <div class="mt-6 grid md:grid-cols-2 gap-6" id="tipsGrid">
+      </div>
+    </section>
+
+    <section id="challenge" class="py-16 border-t border-white/5">
+      <h2 class="text-3xl gold font-extrabold">التحديات</h2>
+      <p class="mt-4 text-gray-300">اختر تحديًا يوميًا وسجله عندما تنجح. كلما زاد العدد، كلما زاد التأثير!</p>
+
+      <div class="mt-6 grid md:grid-cols-2 gap-6">
+        <div class="p-6 rounded-xl bg-white/5">
+          <h3 class="font-bold">تحديات مقترحة</h3>
+          <ul id="challengeList" class="mt-4 space-y-3 text-gray-300"></ul>
+        </div>
+
+        <div class="p-6 rounded-xl bg-white/5">
+          <h3 class="font-bold">عداد التحديات</h3>
+          <div class="mt-4 flex items-center gap-4">
+            <div class="text-4xl font-extrabold" id="count">0</div>
+            <div class="flex flex-col">
+              <button id="addBtn" class="mb-2 px-4 py-2 rounded-xl bg-gradient-to-l from-green-600 to-green-500 font-bold">أنجزت تحدي</button>
+              <button id="resetBtn" class="px-4 py-2 rounded-xl border border-white/10">إعادة ضبط</button>
+            </div>
+          </div>
+          <p class="mt-4 text-sm text-gray-400">يتم حفظ تقدمك محليًا في المتصفح.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="contact" class="py-16 border-t border-white/5">
+      <h2 class="text-3xl gold font-extrabold">اتصل بنا</h2>
+      <p class="mt-4 text-gray-300">لو عندك أفكار أو حابب تتعاون، اكتب لنا رسالة.</p>
+
+      <form id="contactForm" class="mt-6 grid gap-3 max-w-xl" onsubmit="return false;">
+        <input id="name" type="text" placeholder="الاسم" class="p-3 rounded-lg bg-black/50 border border-white/5 text-white" required>
+        <input id="email" type="email" placeholder="البريد الإلكتروني" class="p-3 rounded-lg bg-black/50 border border-white/5 text-white" required>
+        <textarea id="message" rows="5" placeholder="رسالتك" class="p-3 rounded-lg bg-black/50 border border-white/5 text-white"></textarea>
+        <div class="flex gap-3 justify-start">
+          <button id="sendBtn" class="px-5 py-3 rounded-xl bg-gradient-to-l from-green-600 to-green-500 font-bold">إرسال الرسالة</button>
+          <div id="formResult" class="text-gold self-center"></div>
+        </div>
+      </form>
+    </section>
+
+  </main>
+
+  <footer class="py-8 text-center text-sm text-gray-400">
+    © Eco Hero — معًا من أجل كوكب أنظف
+  </footer>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r152/three.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vanilla-tilt@1.7.0/dist/vanilla-tilt.min.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
